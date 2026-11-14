@@ -1,0 +1,21 @@
+{
+  "schema": "up-allocator-platform-reference-v1",
+  "profile": "fe310-provisional",
+  "target": "riscv32imac-unknown-none-elf",
+  "cpu": "RV32IMAC",
+  "board": "SiFive FE310 / HiFive1 Rev B",
+  "role": "provisional portability harness",
+  "rtos": null,
+  "toolchain_spike": "1.100.0",
+  "ferrocene_status": "pending independent target/RTOS-fit research; no acceptance claim",
+  "shared_core_target_blocker": "unconditional AtomicU64 imports in current full core",
+  "source_prepared": true,
+  "source_review": "accepted for experimental packaging",
+  "host_compile": "PASS: Rust1.100 library and host example check against exact public SDK revision",
+  "target_compile": "not run",
+  "final_link": "not run",
+  "emulator": "not run",
+  "hardware": "not run",
+  "asil_acceptance": false,
+  "sdk_git_revision": "7cfd1b30fe674f7b93a74725c6d458beec5d041b"
+}

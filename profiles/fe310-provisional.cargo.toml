@@ -1,0 +1,3 @@
+# Experimental target selection only; no linker or RTOS integration implied.
+[build]
+target = "riscv32imac-unknown-none-elf"

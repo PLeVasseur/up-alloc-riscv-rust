@@ -1,0 +1,15 @@
+[package]
+name = "up-alloc-riscv-rust"
+version = "0.0.0-experimental.1"
+edition = "2021"
+rust-version = "1.100"
+license = "Apache-2.0"
+description = "Experimental fixed startup-memory provider configuration for RISC-V"
+repository = "https://github.com/PLeVasseur/up-alloc-riscv-rust"
+publish = false
+
+[dependencies]
+# Both external providers consume the same reviewed experimental SDK revision.
+up-rust-alloc = { git = "https://github.com/PLeVasseur/up-rust", rev = "7cfd1b30fe674f7b93a74725c6d458beec5d041b" }
+
+[workspace]
