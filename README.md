@@ -36,14 +36,16 @@ mechanism without copying its unsafe implementation.
 
 This is an **experimental integration**, not a qualified target allocator or
 production SDK release. It uses stable Rust 1.100's standard `Allocator` API in an
-optional `no_std + alloc` SDK crate. The integrated production core's MSRV and
-four wire/transport pins are unchanged. Ferrocene target/toolchain and `alloc`
-qualification are separate evidence questions; no such acceptance is claimed.
+optional `no_std + alloc` SDK crate. The production core pin `204eaa24…` and
+its Rust 1.88 MSRV are unchanged; the two wires, two uP-L1 transports and both
+providers share the experimental SDK revision named below. Ferrocene
+target/toolchain and `alloc` qualification are separate evidence questions; no
+such acceptance is claimed.
 
-The manifest pins [the public experimental SDK](https://github.com/PLeVasseur/up-rust/tree/7cfd1b30fe674f7b93a74725c6d458beec5d041b)
-to `7cfd1b30fe674f7b93a74725c6d458beec5d041b`. Both provider repositories use that same revision. There are no
+The manifest pins [the public experimental SDK](https://github.com/PLeVasseur/up-rust/tree/02c6340115f089dd13552f3a03ba30de1d98d8b4)
+to `02c6340115f089dd13552f3a03ba30de1d98d8b4` (branch `codex/allocator-mcu-spike`). Both provider repositories use that same revision. There are no
 private SDK copies, local path dependencies, or patch overrides in this package.
-This experimental SDK does not yet contain the separate native32 repair.
+This SDK revision includes the shared native32 execution-model selection described below.
 
 The implementation belongs to the shared SDK's `up-rust-alloc::fixed`, **once**.
 This independent crate supplies a safe public entry point and platform-profile
@@ -98,14 +100,19 @@ is prepared in the separate, unrun QEMU test harness; its independent review and
 full-core build/link gates remain open. It is not part of this provider or a
 production runtime guarantee.
 
-The selected full SDK currently imports `AtomicU64`, unavailable on the listed
-32-bit MCU targets. The actual target check is therefore expected to expose that
-shared-core boundary. No private memory-only SDK fork, force-enabled atomics or
+At this SDK revision the shared core compiles for a bare-metal target only with
+an explicitly selected SDK-owned execution model. For
+`riscv32imac-unknown-none-elf` that is
+`RUSTFLAGS='--cfg up_rust_native32_model="riscv32-sifive-e"'`, the SDK's SiFive E
+image profile used with the QEMU `sifive_e` harness; it is not physical HiFive1
+Rev B qualification. No private memory-only SDK fork, force-enabled atomics or
 silently disabled core modules are used. Source, host compilation/execution,
 target compilation, final link, emulator execution and hardware qualification
 must be recorded separately. G1/G2/G4 and clock/entropy/exclusion are not solved
 by this allocation experiment.
 
-Host checks against the exact public SDK revision passed on Rust1.100.0.
-See [VALIDATION.md](VALIDATION.md) for scope and [SDK-PIN.json](SDK-PIN.json)
-for the dependency pin. Target and QEMU results remain open.
+At this SDK revision, locked Rust1.100.0 checks passed for the host library, the
+host example and the `riscv32imac-unknown-none-elf` library with the `riscv32-sifive-e` model, on an
+aarch64 macOS host. See [VALIDATION.md](VALIDATION.md) for scope and
+[SDK-PIN.json](SDK-PIN.json) for the dependency pin. Final link, QEMU and hardware
+results remain open for this provider revision.

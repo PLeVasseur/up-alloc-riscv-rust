@@ -1,8 +1,9 @@
 {
   "repository": "https://github.com/PLeVasseur/up-rust",
   "branch_for_navigation": "codex/allocator-mcu-spike",
-  "revision": "7cfd1b30fe674f7b93a74725c6d458beec5d041b",
+  "revision": "02c6340115f089dd13552f3a03ba30de1d98d8b4",
+  "previous_revision": "7cfd1b30fe674f7b93a74725c6d458beec5d041b",
   "package": "up-rust-alloc",
   "production_core_pin_unchanged": "204eaa24cde3378620f5883a49881bbd7b4fabb4",
-  "scope": "experimental optional1.100 allocator integration; native32 not yet included"
+  "scope": "experimental optional1.100 allocator integration; includes the native32 execution-model selection"
 }

@@ -8,14 +8,14 @@
   "rtos": null,
   "toolchain_spike": "1.100.0",
   "ferrocene_status": "pending independent target/RTOS-fit research; no acceptance claim",
-  "shared_core_target_blocker": "unconditional AtomicU64 imports in current full core",
+  "shared_core_target_blocker": "no FE310/HiFive1 board qualification; the riscv32imac-unknown-none-elf check used the SDK riscv32-sifive-e model",
   "source_prepared": true,
   "source_review": "accepted for experimental packaging",
   "host_compile": "PASS: Rust1.100 library and host example check against exact public SDK revision",
-  "target_compile": "not run",
+  "target_compile": "PASS: Rust1.100 library check for riscv32imac-unknown-none-elf with the SDK riscv32-sifive-e model against exact public SDK revision",
   "final_link": "not run",
   "emulator": "not run",
   "hardware": "not run",
   "asil_acceptance": false,
-  "sdk_git_revision": "7cfd1b30fe674f7b93a74725c6d458beec5d041b"
+  "sdk_git_revision": "02c6340115f089dd13552f3a03ba30de1d98d8b4"
 }
