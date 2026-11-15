@@ -1,7 +1,8 @@
 # Experimental host validation — November14,2026
 
 > Historical record at SDK `7cfd1b30fe674f7b93a74725c6d458beec5d041b`. Successor
-> compile checks at `02c6340115f089dd13552f3a03ba30de1d98d8b4` are in the final section.
+> compile checks at `02c6340115f089dd13552f3a03ba30de1d98d8b4` and
+> `08c0a83e174afea6b227e74c9dfaadf8b0828258` are in the final sections.
 
 The independent source review accepted this thin public provider and the common
 allocator's body-preserving move into the optional SDK crate. The provider Rust
@@ -48,3 +49,23 @@ RUSTFLAGS='--cfg up_rust_native32_model="riscv32-sifive-e"' \
 The provider source and host example are unchanged. These are compile checks
 only: no example, final link, QEMU or hardware execution ran, and no RTOS,
 timing, Ferrocene/ASIL or G1/G2/G4 acceptance is claimed.
+
+## Successor compile checks at SDK `08c0a83` — November 15, 2026
+
+The manifest and lock resolve `up-rust-alloc` and `up-rust-core` from the public
+Git branch `codex/allocator-mcu-spike` at `08c0a83e174afea6b227e74c9dfaadf8b0828258`,
+with no path or patch override; only the SDK source lines changed in `Cargo.lock`.
+Offline locked Rust1.100.0 checks passed on an aarch64 macOS host:
+
+```sh
+cargo +1.100.0 check --offline --locked --lib
+cargo +1.100.0 check --offline --locked --examples
+RUSTFLAGS='--cfg up_rust_native32_model="riscv32-sifive-e"' \
+  cargo +1.100.0 check --offline --locked --lib --target riscv32imac-unknown-none-elf
+```
+
+The SDK change from `02c6340` is internal to `up-rust-core` (Windows x86-64 MSVC
+host admission and the bounded deadline planner); the bare-metal model selection
+used here is unchanged. The provider source and host example are unchanged. These
+are compile checks only: no example, final link, QEMU or hardware execution ran
+at this pin, and no RTOS, timing, Ferrocene/ASIL or G1/G2/G4 acceptance is claimed.

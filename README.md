@@ -42,8 +42,8 @@ providers share the experimental SDK revision named below. Ferrocene
 target/toolchain and `alloc` qualification are separate evidence questions; no
 such acceptance is claimed.
 
-The manifest pins [the public experimental SDK](https://github.com/PLeVasseur/up-rust/tree/02c6340115f089dd13552f3a03ba30de1d98d8b4)
-to `02c6340115f089dd13552f3a03ba30de1d98d8b4` (branch `codex/allocator-mcu-spike`). Both provider repositories use that same revision. There are no
+The manifest pins [the public experimental SDK](https://github.com/PLeVasseur/up-rust/tree/08c0a83e174afea6b227e74c9dfaadf8b0828258)
+to `08c0a83e174afea6b227e74c9dfaadf8b0828258` (branch `codex/allocator-mcu-spike`). Both provider repositories use that same revision. There are no
 private SDK copies, local path dependencies, or patch overrides in this package.
 This SDK revision includes the shared native32 execution-model selection described below.
 
@@ -96,9 +96,14 @@ A preserved Rust 1.100 staticlib probe requires global-allocator registration ev
 when selected operations use only an explicit allocator. Registration, allocation
 error handling, panic handling, board memory layout and startup remain final-link
 work. No global heap fallback is introduced here. A rejecting global registration
-is prepared in the separate, unrun QEMU test harness; its independent review and
-full-core build/link gates remain open. It is not part of this provider or a
-production runtime guarantee.
+lives in the separate QEMU test harness, which is not part of this provider or a
+production runtime guarantee. After its independent review, that harness linked
+Rust 1.100 release images from this provider's current library source and a
+frozen pre-publication SDK source tree (native32/allocator sources before the
+SDK's later G2/G4 composition). On November 14, 2026 the RV32IMAC image passed
+its native32 and allocator probes once under QEMU `sifive_e,revb=on`, exit 0
+(ELF SHA-256 `9c84390f…`). That run binds that exact image only, not this
+provider at the pinned SDK revision.
 
 At this SDK revision the shared core compiles for a bare-metal target only with
 an explicitly selected SDK-owned execution model. For

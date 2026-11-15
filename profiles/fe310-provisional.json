@@ -17,5 +17,5 @@
   "emulator": "not run",
   "hardware": "not run",
   "asil_acceptance": false,
-  "sdk_git_revision": "02c6340115f089dd13552f3a03ba30de1d98d8b4"
+  "sdk_git_revision": "08c0a83e174afea6b227e74c9dfaadf8b0828258"
 }
