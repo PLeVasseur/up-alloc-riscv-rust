@@ -42,8 +42,8 @@ providers share the experimental SDK revision named below. Ferrocene
 target/toolchain and `alloc` qualification are separate evidence questions; no
 such acceptance is claimed.
 
-The manifest pins [the public experimental SDK](https://github.com/PLeVasseur/up-rust/tree/08c0a83e174afea6b227e74c9dfaadf8b0828258)
-to `08c0a83e174afea6b227e74c9dfaadf8b0828258` (branch `codex/allocator-mcu-spike`). Both provider repositories use that same revision. There are no
+The manifest pins [the public experimental SDK](https://github.com/PLeVasseur/up-rust/tree/dc7f22da2bf90d98d94d468621df26caadf853ca)
+to `dc7f22da2bf90d98d94d468621df26caadf853ca` (branch `codex/allocator-mcu-spike`). Both provider repositories use that same revision. There are no
 private SDK copies, local path dependencies, or patch overrides in this package.
 This SDK revision includes the shared native32 execution-model selection described below.
 

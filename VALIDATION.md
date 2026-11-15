@@ -1,8 +1,9 @@
 # Experimental host validation — November14,2026
 
 > Historical record at SDK `7cfd1b30fe674f7b93a74725c6d458beec5d041b`. Successor
-> compile checks at `02c6340115f089dd13552f3a03ba30de1d98d8b4` and
-> `08c0a83e174afea6b227e74c9dfaadf8b0828258` are in the final sections.
+> compile checks at `02c6340115f089dd13552f3a03ba30de1d98d8b4`,
+> `08c0a83e174afea6b227e74c9dfaadf8b0828258` and
+> `dc7f22da2bf90d98d94d468621df26caadf853ca` are in the final sections.
 
 The independent source review accepted this thin public provider and the common
 allocator's body-preserving move into the optional SDK crate. The provider Rust
@@ -69,3 +70,26 @@ host admission and the bounded deadline planner); the bare-metal model selection
 used here is unchanged. The provider source and host example are unchanged. These
 are compile checks only: no example, final link, QEMU or hardware execution ran
 at this pin, and no RTOS, timing, Ferrocene/ASIL or G1/G2/G4 acceptance is claimed.
+
+## Successor compile checks at SDK `dc7f22d` — November 15, 2026
+
+The manifest and lock resolve `up-rust-alloc` and `up-rust-core` from the public
+Git branch `codex/allocator-mcu-spike` at `dc7f22da2bf90d98d94d468621df26caadf853ca`,
+with no path or patch override; only the SDK source lines changed in `Cargo.lock`.
+Offline locked Rust1.100.0 checks passed on an aarch64 macOS host:
+
+```sh
+cargo +1.100.0 check --offline --locked --lib
+cargo +1.100.0 check --offline --locked --examples
+RUSTFLAGS='--cfg up_rust_native32_model="riscv32-sifive-e"' \
+  cargo +1.100.0 check --offline --locked --lib --target riscv32imac-unknown-none-elf
+```
+
+The SDK change from `08c0a83` is internal to `up-rust-core`. Before reporting
+ready, its pthread deadline worker (64-bit macOS; x86-64, AArch64 and RISC-V 64
+Linux GNU) now also exercises the wall clock, a timed wait and errno, besides
+the monotonic clock, untimed wait and wakes it already touched; the rest of the
+change is test-only. The build script and the bare-metal model selection used
+here are unchanged, and so are the provider source and host example. These are
+compile checks only: no example, final link, QEMU or hardware execution ran at
+this pin, and no RTOS, timing, Ferrocene/ASIL or G1/G2/G4 acceptance is claimed.
